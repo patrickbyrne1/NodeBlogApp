@@ -37,7 +37,7 @@ module.exports = function(passport) {
                 console.log(newUserMysql);
                 mysql.pool.query(addUserQuery, [newUserMysql.username, newUserMysql.password], function(err, rows){
                     console.log(rows);
-                    newUserMysql.id = rows.insertId;
+                    newUserMysql.userId = rows.insertId;
                     console.log(newUserMysql);
                     return done(null, newUserMysql);
                 });

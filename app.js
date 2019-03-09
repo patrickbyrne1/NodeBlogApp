@@ -25,7 +25,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.set('port', 55777);
+app.set('port', 55770);
 
 
 app.get("/", function(req, res){
@@ -34,7 +34,6 @@ app.get("/", function(req, res){
 
 //login page
 app.get("/login", function(req, res){
-    console.log("testing");
     res.render("login.ejs", {message:req.flash('loginMessage')});
 });
 
@@ -170,7 +169,7 @@ app.post("/blogs/:id/comments", function(req, res){
 app.post("/blogs", function(req, res){
     req.body.blog.body = req.sanitize(req.body.blog.body);
     var title = req.body.blog.title;
-    //var image = req.body.blog.image;
+    var image = req.body.blog.image;
     var date =  new Date();
     var body = req.body.blog.description;
     console.log(req.body.blog.body);
@@ -180,8 +179,8 @@ app.post("/blogs", function(req, res){
         var context = {};
         mysql.pool.query("SELECT userId, workspaceId, roleId FROM permissions_list WHERE userId = ?", [userId], function(err, rows,fields){
             context.results = JSON.parse(JSON.stringify(rows));
-            if (context.results[0].roleId == 3 || context.results[0].roleId == 4) {
-                mysql.pool.query("INSERT INTO `blog_post` (`workspaceId`, `userId`, `title`, `date`, `body`) VALUES (?,?,?,?,?)", [context.results[0].workspaceId, userId, title, date, body], function(err, result){
+            if (context.results[0].roleId == 4) {
+                mysql.pool.query("INSERT INTO `blog_post` (`workspaceId`, `userId`, `title`, `date`, `body`, `image`) VALUES (?,?,?,?,?,?)", [context.results[0].workspaceId, userId, title, date, body, image], function(err, result){
                     if(err){
                         res.redirect("/home");
                 }
