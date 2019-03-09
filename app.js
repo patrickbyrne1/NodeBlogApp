@@ -34,6 +34,7 @@ app.get("/", function(req, res){
 
 //login page
 app.get("/login", function(req, res){
+    console.log("testing");
     res.render("login.ejs", {message:req.flash('loginMessage')});
 });
 
