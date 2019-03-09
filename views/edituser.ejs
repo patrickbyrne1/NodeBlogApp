@@ -1,0 +1,28 @@
+<!-- include header template -->
+<% include ./partials/header %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit User</div>
+    <form class="ui form" action="/users/<%= results[0].userId%>" method="POST">
+        <div class="field">
+           <label>First Name</label>
+           <input type="text" name="user[first_name]" placeholder="First Name" value="<%= results[0].first_name %>"> 
+        </div>
+        
+        <div class="field">
+           <label>Last Name</label>
+           <input type="text" name="user[last_name]" placeholder="Last Name" value="<%= results[0].last_name %>">
+        </div>
+        
+        <div class="field">
+                <label>Email</label>
+                <input type="text" name="user[email]" placeholder="Email" value="<%= results[0].email %>">
+             </div>
+        
+        <button class="ui secondary big basic button">Update User</button>
+        <input type="hidden" name="id" value="<%= results[0].userId %>">
+    </form>
+</div>
+
+<!-- include footer template -->
+<% include ./partials/footer %>

@@ -1,0 +1,121 @@
+<!-- include header template -->
+<% include ./partials/header %>
+
+<div class="ui main text container segment">
+        <div class="ui huge header">New Blog</div>
+        <form class="ui form" action="/workspaces" method="POST">
+            <div class="field">
+               <label>Workspace Name</label>
+               <input type="text" name="workspace[name]" placeholder="Workspace Name"> 
+            </div>
+            <button class="ui secondary big basic button">Add Workspace</button>
+        </form>
+        <div class="ui huge header">All workspaces</div>
+        <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Workspace Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% workspaces.names.forEach(function(space) {%>
+                        <form>
+                        <tr>
+                            <td data-label="First Name"><%= space.workspace_name %></td>
+                        </tr>
+                    </form>
+                    <% }) %>
+                </tbody>
+        </table>
+        
+        <div class="ui huge header">Add a User</div>
+        <form class="ui form" action="/createuser" method="POST">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Email"> 
+            </div>
+                 
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="password">
+            </div>
+            <button class="ui secondary big basic button">Add User</button>
+        </form>
+        
+        <div class="ui huge header">All Users</div>
+        <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.records.forEach(function(user) {%>
+                        <form>
+                        <tr>
+                            <td data-label="First Name"><%= user.first_name %></td>
+                            <td data-label="Last Name"><%= user.last_name %></td>
+                            <td data-label="Email"><%= user.email %></td>
+                            <td><a class="ui blue basic button" href="/users/<%= user.userId %>/edit">Edit User</a></td>
+                        </tr>
+                    </form>
+                    <% }) %>
+                </tbody>
+        </table>
+        <div class="ui huge header">All Roles</div>
+        <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Workspace Name</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% context.results.forEach(function(record) {%>
+                        <tr>
+                            <td data-label="First Name"><%= record.first_name %></td>
+                            <td data-label="Last Name"><%= record.last_name %></td>
+                            <td data-label="Workspace Name"><%= record.workspace_name %></td>
+                            <td data-label="Role"><%= record.role_name %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+        </table>
+
+            <div class="ui huge header">Add Roles</div>
+            <form class="ui form" action="/roles" method="POST">
+                <div class="field">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Email"> 
+                </div>
+                 
+                <div class="field">
+                    <label>Workspace Name</label>
+                    <input type="text" name="workspace_name" placeholder="Workspace Name">
+                </div>
+                <div class="ui radio checkbox">
+                    <input type="radio" name="admin" value="3">
+                    <label>Administrator</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input type="radio" name="owner" value="4">
+                    <label>Owner</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input type="radio" name="viewer" value="5">
+                    <label>Viewer</label>
+                </div>
+                <br />
+                <button class="ui secondary big basic button">Add Role</button>
+            </form>
+
+</div>
+
+
+
+<!-- include footer template -->
+<% include ./partials/footer %>

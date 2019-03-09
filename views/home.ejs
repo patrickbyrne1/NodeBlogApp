@@ -1,0 +1,27 @@
+<!-- include header template -->
+<% include ./partials/header %>
+    
+    <div class="ui main text container">
+        <div class="ui huge header">Mr. Skywalker's Workspaces</div>
+        <div class="ui top attached segment">
+            <div class="ui divided items">
+                <% results.forEach(function(record){ %>
+                    <div class="item">
+                        <div class="content">
+                            <a class="header" href"/workspaces/<%= record.workspaceId %>"><%= record.workspace_name %></a>
+                            <div class="extra">
+                                <a class="ui green basic button" href="/workspaces/<%= record.workspaceId %>">
+                                    Read More
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>  
+    </div>
+
+
+<!-- include footer template -->
+<% include ./partials/footer %>

@@ -1,0 +1,40 @@
+<!-- include header template -->
+<% include ./partials/header %>
+<div class="ui main text container">
+    <div class="ui huge header">All Blog Posts</div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% results.forEach(function(blog){%>
+                <div class="item">
+                    <div class="image">
+                        <img src="<%= blog.image %>">
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blogs/<%= blog.postId %>"><%= blog.title %></a>
+                        <div class="meta">
+                            <span><%= blog.date %></span>
+                        </div>
+                        <div class="description">
+                            <p><%= blog.body.substring(0,100) %>...</p>
+                        </div>
+                        <div class="extra">
+                            <a class="ui green basic button" href="/blogs/<%= blog.postId %>">
+                                Read More
+                            </a>
+                            <form action="/blogs/<%= blog.postId%>/delete" method="POST">
+                                <input type="hidden" name="postId" value="<%= blog.postId %>">
+                                <button class="ui negative basic button">Delete Post</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    
+</div>
+
+
+<!-- include footer template -->
+<% include ./partials/footer %>
