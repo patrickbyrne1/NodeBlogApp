@@ -6,6 +6,7 @@ var express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     flash = require('connect-flash'),
+    ejsLint = require('ejs-lint');
     expressSanitizer = require('express-sanitizer');
 
 require('./passport.js')(passport);
@@ -25,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.set('port', 55770);
+app.set('port', 55771);
 
 
 app.get("/", function(req, res){
@@ -159,8 +160,8 @@ app.post("/blogs/:id/comments", function(req, res){
         res.redirect("/blogs/"+ id);
         });
     } else {
-        alert("You must be logged in to do that!");
-        res.redirect("/blogs/" + id);
+        req.flash("You must be logged in to do that!");
+        res.redirect("/login");
     }
     
 })
@@ -190,7 +191,7 @@ app.post("/blogs", function(req, res){
         })
         
     } else {
-        alert("You must be logged in to create a blog!");
+        req.flash("You must be logged in to create a blog!");
         res.redirect("/login");
     }
     
