@@ -34,9 +34,11 @@
                         <form action="/comments/<%= comment.commentId%>" method="POST">
                             <input type="hidden" name="id" value="<%= comment.commentId %>">
                             <input type="hidden" name="blogId" value="<%= comment.postId %>">
-                            <button class="ui icon button">
-                                <i class="trash alternate icon"></i>
-                            </button>
+                            <% if(comment.commentId !== null) { %>
+                                <button class="ui icon button">
+                                    <i class="trash alternate icon"></i>
+                                </button>
+                            <% } %>
                         </form>
                     </div>
                 </div>
